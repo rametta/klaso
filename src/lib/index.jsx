@@ -8,7 +8,7 @@ import { Component } from 'react'
 
 /**
  * klaso
- * @param {{ state: any, methods: Function, staticMethods: Object }} config 
+ * @param {{ state?: any, methods: Function, staticMethods?: Object }} config
  */
 const klaso = config => render =>
   class Klaso extends Component {
