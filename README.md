@@ -6,14 +6,36 @@
 
 A functional alternative to stateful components in React.
 
+### Basic
+
 ```js
 import klaso from 'klaso'
 
-const MyButton = <button>Click me</button>
+const MyButton = ({ count, inc }) => <button onClick={inc}>{count}</button>
 
-const MyButtonEnhanced = klaso(MyButton, ctx => ({
-  componentDidMount: () => console.log('mounted'),
-}))
+const MyButtonEnhanced = klaso ({
+  state: { count: 5 }
+  methods: ctx => ({
+    inc: () => ctx.setState({ count: ctx.state.count + 1 })
+  })
+}) (MyButton)
 ```
 
-Also supports local state, local methods and static methods.
+### Using Lifecycles
+
+```js
+import klaso from 'klaso'
+
+const MyButton = () => <button>Click me</button>
+
+const MyButtonEnhanced = klaso ({
+  methods: ctx => ({
+    componentDidMount: () => console.log('mounted'),
+    componentDidUpdate: (prevProps, prevState, snapshot) => console.log(snapshot),
+    getSnapshotBeforeUpdate: (prevProps, prevState) => console.log(prevProps, prevState),
+  }),
+  staticMethods: {
+    getDerivedStateFromProps: (props, state) => console.log(props) || null
+  }
+}) (MyButton)
+```
