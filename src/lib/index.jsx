@@ -16,10 +16,12 @@ const klaso = config => render =>
 
     static displayName = render.name
 
+    static getDerivedStateFromProps(state, props) {
+      return config.staticMethods ? config.staticMethods.getDerivedStateFromProps(state, props) : null
+    }
+
     constructor(props) {
       super(props)
-
-      Object.keys(config.staticMethods || {}).map(key => (Klaso[key] = config.staticMethods[key]))
 
       Object.assign(this, config.methods(this), {
         render: () => render({ ...this.props, ...this.state, ...config.methods(this) }),
