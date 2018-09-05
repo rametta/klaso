@@ -1,6 +1,6 @@
 {
   "name": "klaso",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A functional alternative to creating stateful components in React",
   "main": "lib/index.js",
   "scripts": {
