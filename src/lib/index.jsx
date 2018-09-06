@@ -12,12 +12,12 @@ import { Component } from 'react'
  */
 const klaso = config => render =>
   class Klaso extends Component {
-    state = config || config.state || {}
+    state = config && (config.state || {})
 
     static displayName = render.name
 
     static getDerivedStateFromProps(state, props) {
-      return config && config.staticMethods ? config.staticMethods.getDerivedStateFromProps(state, props) : null
+      return config && (config.staticMethods ? config.staticMethods.getDerivedStateFromProps(state, props) : null)
     }
 
     constructor(props) {
