@@ -12,20 +12,21 @@ import { Component } from 'react'
  */
 const klaso = config => render =>
   class Klaso extends Component {
-    state = config.state || {}
+    state = config || config.state || {}
 
     static displayName = render.name
 
     static getDerivedStateFromProps(state, props) {
-      return config.staticMethods ? config.staticMethods.getDerivedStateFromProps(state, props) : null
+      return config && config.staticMethods ? config.staticMethods.getDerivedStateFromProps(state, props) : null
     }
 
     constructor(props) {
       super(props)
-
-      Object.assign(this, config.methods(this), {
-        render: () => render({ ...this.props, ...this.state, ...config.methods(this) }),
-      })
+      if (config) {
+        Object.assign(this, config.methods(this), {
+          render: () => render({ ...this.props, ...this.state, ...config.methods(this) }),
+        })        
+      }
     }
   }
 
