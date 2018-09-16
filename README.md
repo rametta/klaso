@@ -46,3 +46,9 @@ const MyButtonEnhanced = klaso({
   },
 })(MyButton)
 ```
+
+#### Changelog
+- v.1.2.0 -- Sept 16, 2018
+  + Fixed error "Cannot call class as a function" error when composing multiple HOC's
+  + Fix display names for stack traces and react dev tools
+  + New feature to override display names by passing it through the config as `displayName`

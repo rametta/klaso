@@ -19,8 +19,9 @@ const CounterEnhanced = klaso({
   methods: ctx => ({
     dec: () => ctx.setState({ count: ctx.state.count - 1 }),
     inc: () => ctx.setState({ count: ctx.state.count + 1 }),
+    componentDidMount: () => console.log('CounterEnhanced Mounted!')
   }),
-})(Counter)
+}) (Counter)
 
 const App = () => (
   <div>

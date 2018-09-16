@@ -1,20 +1,14 @@
-import { Component } from 'react'
-
-// const config = {
-//   state: {},
-//   methods: ctx => ({}),
-//   staticMethods: {},
-// }
+import React, { Component } from 'react'
 
 /**
  * klaso
- * @param {{ state?: any, methods: Function, staticMethods?: Object }} config
+ * @param {{ state?: any, displayName?: String, methods: Function, staticMethods?: Object }} config
  */
-const klaso = config => render =>
-  class Klaso extends Component {
+const klaso = config => Wrapper => 
+  class extends Component {
     state = config.state || {}
 
-    static displayName = render.name
+    static displayName = config.displayName || `Klaso(${Wrapper.displayName || Wrapper.name || 'Component'})` 
 
     static getDerivedStateFromProps(state, props) {
       return config.staticMethods ? config.staticMethods.getDerivedStateFromProps(state, props) : null
@@ -22,11 +16,13 @@ const klaso = config => render =>
 
     constructor(props) {
       super(props)
+      Object.assign(this, config.methods(this))
+    }
 
-      Object.assign(this, config.methods(this), {
-        render: () => render({ ...this.props, ...this.state, ...config.methods(this) }),
-      })
+    render() {
+      return <Wrapper {...this.props} {...this.state} {...config.methods(this)}/>
     }
   }
+
 
 export default klaso
