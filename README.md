@@ -21,7 +21,7 @@ import klaso from 'klaso'
 const MyButton = ({ count, inc }) => <button onClick={inc}>{count}</button>
 
 const MyButtonEnhanced = klaso ({
-  state: { count: 5 }
+  state: { count: 5 },
   methods: ctx => ({
     inc: () => ctx.setState({ count: ctx.state.count + 1 })
   })
@@ -48,6 +48,8 @@ const MyButtonEnhanced = klaso({
 ```
 
 #### Changelog
+- v.1.2.1 -- Dec 5, 2018
+  + Added init function that runs in the constructor
 - v.1.2.0 -- Sept 16, 2018
   + Fixed error "Cannot call class as a function" error when composing multiple HOC's
   + Fix display names for stack traces and react dev tools

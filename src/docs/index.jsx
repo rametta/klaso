@@ -16,6 +16,7 @@ const Counter = ({ count, inc, dec }) => (
 
 const CounterEnhanced = klaso({
   state: { count: 1 },
+  init: ctx => console.log('This is ran once', ctx),
   methods: ctx => ({
     dec: () => ctx.setState({ count: ctx.state.count - 1 }),
     inc: () => ctx.setState({ count: ctx.state.count + 1 }),

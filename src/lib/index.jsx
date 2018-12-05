@@ -16,6 +16,7 @@ const klaso = config => Wrapper =>
 
     constructor(props) {
       super(props)
+      config.init && config.init(this)
       Object.assign(this, config.methods(this))
     }
 
